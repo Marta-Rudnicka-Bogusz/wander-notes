@@ -39,6 +39,14 @@ Vue.createApp({
         description: "",
         visited: false,
       },
+      visibleColumns: {
+        name: true,
+        country: false,
+        continent: false,
+        year: false,
+        description: false,
+        visited: false,
+      },
     };
   },
   watch: {
@@ -61,7 +69,7 @@ Vue.createApp({
     fetchAttractions();
 
     const savedAttraction = localStorage.getItem("attractions");
-    if (savedAttraction !==null) {
+    if (savedAttraction !== null) {
       this.attractionsList = JSON.parse(savedAttraction);
     }
   },
@@ -147,6 +155,41 @@ Vue.createApp({
       // delete a.id;
       // console.log(a);
       // this.attractionsList[this.editedAttraction.id] = a;
+
+      if (this.editedAttraction.name === "") {
+        alert("Name cannot be void!");
+        return;
+      }
+
+      if (this.editedAttraction.country === "") {
+        alert("Country cannot be void!");
+        return;
+      }
+
+      if (this.editedAttraction.continent === "") {
+        alert("Choose a continent!");
+        return;
+      }
+      if (
+        this.editedAttraction.year === "" ||
+        this.editedAttraction.year <= 0
+      ) {
+        alert("Place a timestamp!");
+        return;
+      }
+      if (this.editedAttraction.description === "") {
+        alert("Give a short description!");
+        return;
+      }
+      if (
+        this.editedAttraction.description.length < 75 ||
+        this.editedAttraction.description.length > 150
+      ) {
+        alert(
+          "The description must be at least 75 characters cannot exceed 150 characters!"
+        );
+        return;
+      }
 
       const { id, ...withoutId } = this.editedAttraction;
       this.attractionsList[id] = withoutId;

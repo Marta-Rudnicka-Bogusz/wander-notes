@@ -224,7 +224,7 @@
               v-model="NewAttraction.continent"
               :class="{'empty': NewAttraction.continent === ''}"
             >
-              <option value="" class="empty">Choose continent:</option>
+              <option value="" disabled class="empty">Choose continent:</option>
               <option
                 v-for="continent in continents"
                 :key="continent"
@@ -321,25 +321,29 @@
               <thead>
                 <tr>
                   <th
-                    class="tableRow"
+                    :class="['tableRow', { 'd-none d-sm-none d-md-table-cell': !visibleColumns[key] }]"
                     scope="col"
                     v-for="(value, key) in NewAttraction"
                     :key="key"
                   >
                     {{key}}
                   </th>
-                  <th>edit</th>
+                  <th scope="col" class="tableRow">edit</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(attraction, index) in attractionsList" :key="index">
-                  <td v-for="(value, key) in NewAttraction" :key="key">
+                  <td
+                    v-for="(value, key) in NewAttraction"
+                    :key="key"
+                    :class="['cell', { 'd-none d-sm-none d-md-table-cell': !visibleColumns[key] }]"
+                  >
                     <i
                       v-if="key==='visited' && !attraction[key]"
                       class="fa-solid fa-xmark text-danger"
                       @click="wasVisited(attraction)"
                       style="cursor: pointer"
-                      title="Mark as  visited"
+                      title="Mark as visited"
                     ></i>
                     <i
                       v-else-if="key==='visited' && attraction[key]"
@@ -361,7 +365,7 @@
                     >
                       <i
                         title="Edit attraction"
-                        class="fa-solid fa-pen-to-square mr-2"
+                        class="fa-solid fa-pen-to-square"
                       ></i>
                     </button>
                   </td>
@@ -467,10 +471,12 @@
       <!-- Footer -->
       <div class="grid-container1">
         <div class="grid-item item-6"></div>
-        <div class="grid-item item-7">
-          <p>Copyright Proudly presented to you by</p>
+        <div class="grid-item item-7 text-center">
+          <p>Copyright: Proudly presented to you by:</p>
         </div>
-        <div class="grid-item item-8"><p>Marta Rudnicka-Bogusz&copy;</p></div>
+        <div class="grid-item item-8 text-center">
+          <p>Marta Rudnicka-Bogusz&copy;</p>
+        </div>
       </div>
 
       <!-- END -->
