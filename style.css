@@ -9,7 +9,7 @@ html {
 .header {
   height: 25px;
 }
-/* header z menu */
+/* header with menu */
 .grid-container {
   background-color: rgb(112, 117, 191);
   display: grid;
@@ -57,6 +57,7 @@ html {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+/* dream */
 .grid-item-8 {
   margin: 2%;
 }
@@ -66,7 +67,16 @@ h6,
 }
 .grid-container3 {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 50%));
+}
+@media screen and (max-width: 599px) {
+  .grid-container3 {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: 600px) {
+  .grid-container3 {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 50%));
+  }
 }
 .empty {
   color: #6c757d;
@@ -81,9 +91,13 @@ h6,
 .tableRow {
   text-align: center;
 }
-td {
+.cell {
   text-align: left;
 }
+td {
+  text-align: center;
+}
+
 .pen {
   color: black;
 }
